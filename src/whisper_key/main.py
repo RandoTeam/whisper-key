@@ -105,6 +105,7 @@ def setup_whisper_engine(whisper_config, vad_manager, model_registry, log_transc
             beam_size=whisper_config['beam_size'],
             initial_prompt=whisper_config.get('initial_prompt', ''),
             hotwords=whisper_config.get('hotwords', []),
+            strip_trailing_period=whisper_config.get('strip_trailing_period', False),
             vad_manager=vad_manager,
             model_registry=model_registry,
             log_transcriptions=log_transcriptions

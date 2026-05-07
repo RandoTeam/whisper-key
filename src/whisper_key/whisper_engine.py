@@ -16,6 +16,7 @@ class WhisperEngine:
                  beam_size: int = 5,
                  initial_prompt: str = "",
                  hotwords: list = None,
+                 strip_trailing_period: bool = False,
                  vad_manager = None,
                  model_registry = None,
                  log_transcriptions: bool = False):
@@ -27,6 +28,7 @@ class WhisperEngine:
         self.beam_size = beam_size
         self.initial_prompt = initial_prompt or None
         self.hotwords = ", ".join(hotwords) if hotwords else None
+        self.strip_trailing_period = strip_trailing_period
         self.model = None
         self.logger = logging.getLogger(__name__)
         self.registry = model_registry
@@ -175,7 +177,10 @@ class WhisperEngine:
                 transcribed_text += segment.text
             
             transcribed_text = transcribed_text.strip()
-            
+
+            if self.strip_trailing_period and transcribed_text.endswith('.'):
+                transcribed_text = transcribed_text[:-1]
+
             end_time = time.time()
             transcription_time = end_time - start_time
             print(f"   ✓ Transcription completed in {transcription_time:.1f} seconds")
