@@ -2,7 +2,8 @@
 @completed.md
 
 ## Next
--
+- As a *user* I want **trailing period stripped** from transcription output so dictating into terminals, chat messages, and form fields doesn't leave a stray `.` at the end (config: `whisper.strip_trailing_period`) ([#55](https://github.com/PinW/whisper-key-local/issues/55))
+- As a *user* I want **`recording_mode` to also apply to the commands hotkey** so push-to-talk works the same for alt-win commands as it does for ctrl-win transcription ([#56](https://github.com/PinW/whisper-key-local/issues/56))
 
 ## Bugs
 - **CUDA version forward-compatibility** - onboarding GPU detection doesn't recognize newer CUDA versions (e.g. CUDA 13.x), and CTranslate2 requires `cublas64_12.dll` which isn't present when only CUDA 13+ is installed. Workaround: manually copy CUDA 12 cuBLAS/cuDNN libs into CUDA 13 bin directory. Need to detect newer CUDA versions and guide users to install the required CUDA 12 compatibility libs
