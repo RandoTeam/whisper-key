@@ -2,6 +2,7 @@
 @completed.md
 
 ## Next
+- As a *user* I want a **startup sound** so I know the app is ready to use when it finishes loading
 - As a *user* I want **trailing period stripped** from transcription output so dictating into terminals, chat messages, and form fields doesn't leave a stray `.` at the end (config: `whisper.strip_trailing_period`) ([#55](https://github.com/PinW/whisper-key-local/issues/55))
 - As a *user* I want **`recording_mode` to also apply to the commands hotkey** so push-to-talk works the same for alt-win commands as it does for ctrl-win transcription ([#56](https://github.com/PinW/whisper-key-local/issues/56))
 
