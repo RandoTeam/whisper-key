@@ -2,9 +2,6 @@
 @completed.md
 
 ## Next
-- As a *user* I want a **startup sound** so I know the app is ready to use when it finishes loading
-- As a *user* I want **trailing period stripped** from transcription output so dictating into terminals, chat messages, and form fields doesn't leave a stray `.` at the end (config: `whisper.strip_trailing_period`) ([#55](https://github.com/PinW/whisper-key-local/issues/55))
-- As a *user* I want **`recording_mode` to also apply to the commands hotkey** so push-to-talk works the same for alt-win commands as it does for ctrl-win transcription ([#56](https://github.com/PinW/whisper-key-local/issues/56))
 
 ## Bugs
 - **CUDA version forward-compatibility** - onboarding GPU detection doesn't recognize newer CUDA versions (e.g. CUDA 13.x), and CTranslate2 requires `cublas64_12.dll` which isn't present when only CUDA 13+ is installed. Workaround: manually copy CUDA 12 cuBLAS/cuDNN libs into CUDA 13 bin directory. Need to detect newer CUDA versions and guide users to install the required CUDA 12 compatibility libs
@@ -76,10 +73,6 @@
 ### Hotkeys
 - As a *user* I want **hotkey sequence ordering** so more hotkey combos can coexist without conflicting (e.g., Ctrl+Alt+Space vs Alt+Ctrl+Space become distinct sequences)
 - As a *developer* I want a **typed `HotkeyBinding` contract** between `hotkey_listener.py` and the platform backends so library-specific fields stop leaking across the boundary — today `hotkey_listener` appends a raw `False` 4th element that silently sets `global-hotkeys`' `actuate_on_partial_release=False` on Windows while macOS ignores it entirely, causing undocumented cross-platform drift and making push-to-talk on multi-key combos behave inconsistently (surfaced by [#51](https://github.com/PinW/whisper-key-local/pull/51))
-
-### Personalization
-- As a *user*, I want **custom hotwords** so I can bias the transcription model toward rare words and names that I say often
-- As a *user*, I want **post-transcription replacements** so consistent misrecognitions are automatically corrected after transcription (e.g., "see translate two" → "CTranslate2")
 
 ### Desktop App
 - As a *user*, I want a **desktop GUI** so that I can change settings without editing files
