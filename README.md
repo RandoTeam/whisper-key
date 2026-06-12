@@ -156,6 +156,10 @@ Delete this file and restart app to reset to defaults.
 | **System Tray** |||
 | `system_tray.enabled` | `true` | Show tray icon |
 | `system_tray.tooltip` | `Whisper Key` | Hover text |
+| **Terminal Title** |||
+| `terminal_title.idle` | `""` | Tab title prefix when idle: static string or `[prefix, seconds]` animation frames |
+| `terminal_title.recording` | 🔴 blink | Tab title prefix while recording |
+| `terminal_title.processing` | `""` | Tab title prefix while transcribing |
 | **Console** |||
 | `console.start_hidden` | `false` | Hide console after startup (whisper-key-hideable.exe only) |
 | **Update** |||
