@@ -49,6 +49,7 @@ class AudioRecorder:
         self._test_audio_source()
 
         self.continuous_streaming = self._setup_continuous_streaming()
+        self.on_volume_callback = None
 
     def _setup_continuous_vad_monitoring(self):
         if self.vad_manager.is_available():
@@ -219,6 +220,13 @@ class AudioRecorder:
             def audio_callback(audio_data, frames, _time, status):
                 if self.is_recording:
                     self.audio_data.append(audio_data.copy())
+
+                    if hasattr(self, 'on_volume_callback') and self.on_volume_callback:
+                        try:
+                            rms = float(np.sqrt(np.mean(audio_data**2)))
+                            self.on_volume_callback(rms)
+                        except Exception:
+                            pass
 
                     if self.continuous_vad and frames == vad_blocksize:
                         if needs_resampling:

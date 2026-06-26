@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: 'Outfit', 'Segoe UI', -apple-system, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Base wrapper to allow box-shadow glow not to be clipped at window edges */
+.glow-container {
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Premium Glassmorphic Capsule */
+.capsule {
+  width: 520px;
+  height: 140px;
+  background: rgba(12, 12, 20, 0.55); /* More transparent dark indigo-slate */
+  backdrop-filter: blur(25px) saturate(190%);
+  -webkit-backdrop-filter: blur(25px) saturate(190%);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  
+  /* Initial Listening State border/shadow glow */
+  border: 1.5px solid rgba(232, 121, 249, 0.4);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    0 0 15px 0 rgba(232, 121, 249, 0.22);
+    
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* State Modification Classes */
+.capsule.state-listening {
+  border-color: rgba(232, 121, 249, 0.45);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    0 0 18px 2px rgba(232, 121, 249, 0.25);
+}
+
+.capsule.state-thinking {
+  border-color: rgba(249, 115, 22, 0.45);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    0 0 18px 2px rgba(249, 115, 22, 0.25);
+}
+
+.capsule.state-idle {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    0 0 15px 0 rgba(16, 185, 129, 0.2);
+}
+
+/* Layout Columns */
+.left-col {
+  width: 140px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
+
+#wave-canvas {
+  width: 140px;
+  height: 120px;
+  border-radius: 14px;
+}
+
+.right-col {
+  flex: 1;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px 24px 10px 10px;
+  box-sizing: border-box;
+}
+
+/* Typography styles */
+.status-text {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  transition: color 0.4s ease;
+}
+
+.text-listening {
+  color: #f472b6; /* Soft neon pink */
+}
+
+.text-thinking {
+  color: #fb923c; /* Soft orange */
+}
+
+.text-success {
+  color: #34d399; /* Soft emerald */
+}
+
+/* Scrollable Text Box Container */
+.text-container {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 4px;
+  margin-bottom: 6px;
+  padding-right: 4px;
+  box-sizing: border-box;
+  
+  /* Hide scrollbar by default for clean look */
+  scrollbar-width: none;
+}
+
+.text-container::-webkit-scrollbar {
+  display: none;
+}
+
+.speech-text {
+  font-size: 19px;
+  line-height: 1.6;
+  font-weight: 500;
+  color: #f4f4f5;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.text-placeholder {
+  color: #71717a;
+  font-style: italic;
+}

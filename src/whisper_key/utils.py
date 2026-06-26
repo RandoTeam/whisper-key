@@ -61,6 +61,31 @@ def setup_portaudio_path():
     if assets_dir.exists():
         os.environ['PATH'] = str(assets_dir) + os.pathsep + os.environ.get('PATH', '')
 
+def setup_cuda_dll_path():
+    if sys.platform != 'win32':
+        return
+    try:
+        import site
+        site_dirs = []
+        try:
+            site_dirs.extend(site.getsitepackages())
+        except AttributeError:
+            pass
+        try:
+            site_dirs.append(site.getusersitepackages())
+        except AttributeError:
+            pass
+        
+        for site_packages_dir in site_dirs:
+            nvidia_base = os.path.join(site_packages_dir, "nvidia")
+            if os.path.exists(nvidia_base):
+                for root, dirs, files in os.walk(nvidia_base):
+                    if root.endswith("bin") and any(f.endswith(".dll") for f in files):
+                        os.add_dll_directory(root)
+                        os.environ['PATH'] = root + os.pathsep + os.environ.get('PATH', '')
+    except Exception:
+        pass
+
 def restart_or_exit(message_restart, message_exit):
     pyapp_exe = os.environ.get('PYAPP', '')
     if os.path.isfile(pyapp_exe):

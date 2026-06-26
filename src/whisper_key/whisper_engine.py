@@ -158,11 +158,14 @@ class WhisperEngine:
             
             transcribe_kwargs = dict(
                 beam_size=self.beam_size,
-                language=self.language,
+                language=self.language or "ru",
                 condition_on_previous_text=False,
+                vad_filter=True,
+                vad_parameters=dict(min_silence_duration_ms=1000),
+                temperature=[0.0, 0.2],
             )
-            if self.initial_prompt:
-                transcribe_kwargs["initial_prompt"] = self.initial_prompt
+            prompt = self.initial_prompt or "Привет! Это пример правильной русской речи: с запятыми, точками, заглавными буквами и тире."
+            transcribe_kwargs["initial_prompt"] = prompt
             if self.hotwords:
                 transcribe_kwargs["hotwords"] = self.hotwords
 

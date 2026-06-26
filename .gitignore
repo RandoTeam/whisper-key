@@ -131,3 +131,12 @@ pyapp-build/build-config.json
 CLAUDE.local.md
 .claude/local-memory/
 .claude/settings.local.json
+
+# Scratch and Agent files
+scratch/
+.gemini/
+
+# Node/Electron dependencies
+node_modules/
+src/whisper_key/gui_electron/node_modules/
+src/whisper_key/gui_electron/package-lock.json

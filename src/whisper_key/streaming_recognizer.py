@@ -139,7 +139,7 @@ class StreamingRecognizer:
     def reset(self) -> None:
         if not self.is_loaded():
             return
-        self.recognizer.reset(self.stream)
+        self.stream = self.recognizer.create_stream()
 
     def set_recording_rate(self, rate: int) -> None:
         self.recording_rate = rate

@@ -42,4 +42,9 @@ class TextPostProcessor:
         if self.strip_trailing_period and text.endswith('.'):
             text = text[:-1]
 
+        # Capitalize the first letter of the text
+        text = text.strip()
+        if text:
+            text = text[0].upper() + text[1:]
+
         return text

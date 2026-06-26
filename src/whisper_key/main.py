@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-from .utils import setup_portaudio_path
+from .utils import setup_portaudio_path, setup_cuda_dll_path
 setup_portaudio_path()
+setup_cuda_dll_path()
 
 import argparse
 import logging
@@ -307,17 +308,102 @@ def main():
 
         system_tray.apply_console_settings()
 
-        app.run_event_loop(shutdown_event)
+        # Initialize UI Components
+        import customtkinter as ctk
+        from .gui import FloatingOverlay, SettingsWindow
+        
+        root = ctk.CTk()
+        root.withdraw()  # Main Tkinter window is hidden by default
+        
+        floating_overlay = FloatingOverlay(root)
+        settings_window = SettingsWindow(state_manager, config_manager, model_registry, audio_recorder)
+        
+        system_tray.attach_settings_window(settings_window)
+
+        import queue
+        ui_queue = queue.Queue()
+
+        def handle_state_change(state):
+            if state == "recording":
+                floating_overlay.show_recording()
+            elif state == "processing":
+                floating_overlay.show_processing()
+            else:
+                floating_overlay.hide()
+
+        def on_state_change(state):
+            if state == "recording":
+                # Clear all previous items in the queue synchronously to avoid stale events
+                with ui_queue.mutex:
+                    ui_queue.queue.clear()
+            ui_queue.put(('state', state))
+
+        state_manager.on_state_change_callbacks.append(on_state_change)
+        state_manager.on_streaming_result_callbacks.append(
+            lambda text, is_final: ui_queue.put(('text', text))
+        )
+        audio_recorder.on_volume_callback = lambda rms: ui_queue.put(('volume', rms))
+
+        def process_ui_queue():
+            try:
+                while True:
+                    msg_type, data = ui_queue.get_nowait()
+                    if msg_type == 'state':
+                        handle_state_change(data)
+                    elif msg_type == 'text':
+                        floating_overlay.update_text(data)
+                    elif msg_type == 'volume':
+                        floating_overlay.update_volume(data)
+            except queue.Empty:
+                pass
+            root.after(30, process_ui_queue)
+
+        root.after(30, process_ui_queue)
+        
+        # Exit handler
+        def on_exit():
+            print("\nShutting down application...")
+            try:
+                if floating_overlay:
+                    floating_overlay.close()
+            except Exception:
+                pass
+            try:
+                if hotkey_listener and hotkey_listener.is_active():
+                    hotkey_listener.stop_listening()
+            except Exception:
+                pass
+            try:
+                if state_manager:
+                    state_manager.shutdown()
+            except Exception:
+                pass
+            root.after(0, root.quit)
+            root.after(100, root.destroy)
+            
+        system_tray.on_exit_callback = on_exit
+
+        # Periodic check for terminal Ctrl+C (SIGINT) signal
+        def check_shutdown_event():
+            if shutdown_event.is_set():
+                on_exit()
+            else:
+                root.after(200, check_shutdown_event)
+                
+        root.after(200, check_shutdown_event)
+        
+        # Start Tkinter main event loop on the main thread
+        root.mainloop()
             
     except KeyboardInterrupt:
-        logger.info("Application shutting down...")
+        if logger:
+            logger.info("Application shutting down...")
         print("\nShutting down application...")
-        
+        shutdown_app(hotkey_listener, state_manager, logger)
     except Exception as e:
-        logger.error(f"Unexpected error: {e}", exc_info=True)
+        if logger:
+            logger.error(f"Unexpected error: {e}", exc_info=True)
         print(f"Error occurred: {e}")
-        
-    finally:
         shutdown_app(hotkey_listener, state_manager, logger)
 
 if __name__ == "__main__":

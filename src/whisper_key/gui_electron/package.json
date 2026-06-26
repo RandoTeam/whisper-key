@@ -1,0 +1,12 @@
+{
+  "name": "whisper-key-overlay",
+  "version": "0.1.0",
+  "description": "Siri-style Floating Overlay for Whisper Key",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^30.0.0"
+  }
+}

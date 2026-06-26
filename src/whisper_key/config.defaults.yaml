@@ -11,21 +11,21 @@
 whisper: # Whisper AI Model Settings
     # Model selection
     # See "models" below for more information
-    model: tiny
+    model: large-v3-turbo-russian
 
     # Transcription device
     # Options: cpu, cuda (for both NVIDIA and AMD)
     # For GPU setup, see https://github.com/PinW/whisper-key-local/blob/master/docs/gpu-setup.md
-    device: cpu
+    device: cuda
 
     # Compute Precision
     # Options: int8, float16, float32
-    compute_type: int8
+    compute_type: float16
 
     # Language detection
     # Options: auto (auto-detect), en, es, fr, de, etc.
     # Set to specific language code to force language, or auto for auto-detection
-    language: auto
+    language: ru
 
     # Transcription quality settings
     beam_size: 5 # Higher = more accurate but slower (1-10)
@@ -67,6 +67,11 @@ whisper: # Whisper AI Model Settings
             label: "Large-V3-Turbo (1.5GB)"
             group: official
             enabled: true
+        large-v3-turbo-russian:
+            source: dvislobokov/faster-whisper-large-v3-turbo-russian
+            label: "Large-V3-Turbo Russian (1.5GB)"
+            group: custom
+            enabled: true
 
         # English-only models — same architecture as above, trained exclusively on English
         tiny.en:
@@ -105,10 +110,10 @@ whisper: # Whisper AI Model Settings
 
 streaming: # Real-time STT (Experimental, speech preview only)
     # Real-time streaming speech recognition using sherpa-onnx
-    streaming_enabled: false
+    streaming_enabled: true
 
     # Streaming model type
-    streaming_model: zipformer.tiny.en
+    streaming_model: zipformer.small.ru
 
     # Available streaming models
     # Requires sherpa-onnx streaming transducer models (e.g., Zipformer)
@@ -121,6 +126,14 @@ streaming: # Real-time STT (Experimental, speech preview only)
                 encoder: encoder-epoch-99-avg-1.int8.onnx
                 decoder: decoder-epoch-99-avg-1.int8.onnx
                 joiner: joiner-epoch-99-avg-1.int8.onnx
+                tokens: tokens.txt
+        zipformer.small.ru:
+            source: csukuangfj/sherpa-onnx-streaming-zipformer-small-ru-vosk-2025-08-16
+            label: "Zipformer Russian Small (Streaming)"
+            files:
+                encoder: encoder.onnx
+                decoder: decoder.onnx
+                joiner: joiner.onnx
                 tokens: tokens.txt
 
 post_processing: # Text Post-Processing (applied to transcription output)

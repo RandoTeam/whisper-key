@@ -50,6 +50,8 @@ class StateManager:
         self._command_mode = False
         self._state_lock = threading.Lock()
         self._streaming_display_active = False
+        self.on_state_change_callbacks = []
+        self.on_streaming_result_callbacks = []
 
         self.logger = logging.getLogger(__name__)
         self._current_audio_host = None
@@ -65,6 +67,11 @@ class StateManager:
     def _update_ui_state(self, state: str):
         self.system_tray.update_state(state)
         self.terminal_title.update_state(state)
+        for cb in self.on_state_change_callbacks:
+            try:
+                cb(state)
+            except Exception:
+                pass
 
     def handle_max_recording_duration_reached(self, audio_data):
         self.logger.info("Max recording duration reached - starting transcription")
@@ -88,6 +95,12 @@ class StateManager:
             display_text = text if len(text) < 67 else "..." + text[-64:]
             print(f"\r   {display_text:<70}", end="", flush=True)
             self._streaming_display_active = True
+
+        for cb in self.on_streaming_result_callbacks:
+            try:
+                cb(text, is_final)
+            except Exception:
+                pass
 
     def _clear_streaming_display(self):
         if self._streaming_display_active:

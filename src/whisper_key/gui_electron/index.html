@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Whisper Key Overlay</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow-container">
+    <div class="capsule">
+      <div class="left-col">
+        <canvas id="wave-canvas" width="140" height="120"></canvas>
+      </div>
+      <div class="right-col">
+        <div id="status-label" class="status-text text-listening">Слушаю...</div>
+        <div class="text-container">
+          <div id="transcription-text" class="speech-text text-placeholder">Говорите, текст появится здесь...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

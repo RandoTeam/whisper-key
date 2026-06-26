@@ -39,9 +39,18 @@ class SystemTray:
         self.is_running = False
         self.current_state = "idle"
         self.available = True
+        self.settings_window = None
+        self.on_exit_callback = None
         
         if self._check_tray_availability():
             self._load_icons_to_cache()
+
+    def attach_settings_window(self, settings_window):
+        self.settings_window = settings_window
+
+    def _show_settings_window(self, icon=None, item=None):
+        if self.settings_window:
+            self.settings_window.after(0, self.settings_window.show_window)
     
     def _check_tray_availability(self) -> bool:
         if not self.tray_config['enabled']:
@@ -175,10 +184,12 @@ class SystemTray:
             menu_items = []
 
             if console.owns_console():
-                menu_items.append(pystray.MenuItem("Show Console", self._show_console, default=True))
+                menu_items.append(pystray.MenuItem("Show Console", self._show_console))
                 menu_items.append(pystray.Menu.SEPARATOR)
 
             menu_items += [
+                pystray.MenuItem("Settings...", self._show_settings_window, default=True),
+                pystray.Menu.SEPARATOR,
                 pystray.MenuItem("Open log file...", self._open_log_file),
                 pystray.MenuItem("Open model cache...", self._open_model_cache),
                 pystray.Menu.SEPARATOR,
@@ -305,7 +316,10 @@ class SystemTray:
         console.start_minimize_monitor(console.hide)
 
     def _quit_application_from_tray(self, icon=None, item=None):        
-        os.kill(os.getpid(), signal.SIGINT)
+        if self.on_exit_callback:
+            self.on_exit_callback()
+        else:
+            os.kill(os.getpid(), signal.SIGINT)
     
     def update_state(self, new_state: str):
         if not TRAY_AVAILABLE or not self.is_running:

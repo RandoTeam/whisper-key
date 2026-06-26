@@ -1,189 +1,92 @@
-# Whisper Key - Local Speech-to-Text
+<div align="center">
+  <img src="https://img.shields.io/badge/Status-Active-success.svg?style=for-the-badge" alt="Status" />
+  <img src="https://img.shields.io/badge/Platform-Windows%2011-blue.svg?style=for-the-badge&logo=windows" alt="Platform" />
+  <img src="https://img.shields.io/badge/Python-3.10+-yellow.svg?style=for-the-badge&logo=python" alt="Python" />
+  <img src="https://img.shields.io/badge/License-MIT-purple.svg?style=for-the-badge" alt="License" />
 
-Global hotkeys to record speech and transcribe directly to your cursor. 
+  <br><br>
+  <h1>🎤 Whisper Key / Beautiful STT Overlay</h1>
+  <p><strong>A premium, lightning-fast Speech-To-Text floating widget for Windows.</strong></p>
+  <p><i>Стильный, молниеносный виджет диктовки (Голос-в-Текст) для Windows с анимациями уровня Apple Siri.</i></p>
+</div>
 
-> Questions or ideas? [Discord](https://discord.gg/uZnXV8snhz)
+<hr>
 
-## ✨ Features
+## 🌟 About The Project / О проекте
 
-- **Global Hotkey**: Start recording speech from any app
-- **Auto-Paste**: Transcribe directly to cursor
-- **Auto-Send**: Optionally auto-send with ENTER keypress
-- **Local/Offline**: Voice data never leaves your computer
-- **CPU Ready**: Small, efficient models available
-- **GPU Ready**: Support for both NVIDIA & AMD cards
-- **Cross-platform**: Works on Windows and macOS
-- **Voice Commands**: Trigger shortcuts, text snippets, and shell commands by voice — [docs](docs/voice-commands.md)
-- **Configurable**: Customize hotkeys, models, and [much more](#️-configuration)
+**Whisper Key** is a beautiful, global overlay application that brings Apple-like dictation to Windows. Simply hold a hotkey (`Ctrl + Win`), speak naturally, and watch as your voice is instantly transcribed and pasted into any active application. Powered by `faster-whisper` and completely offline for total privacy.
 
-## 🚀 Quick Start
+**Whisper Key** — это премиальный глобальный виджет, который переносит удобство диктовки Apple на Windows. Просто зажмите горячую клавишу (`Ctrl + Win`), говорите естественным языком, и ваш текст будет моментально расшифрован и вставлен в любое активное окно. Работает на базе `faster-whisper`, полностью локально и без интернета для защиты вашей приватности.
 
-### From PyPI (Recommended)
+![Screenshot Placeholder](https://placehold.co/800x400/121214/f4f4f5?text=Siri+Wave+Oscillograph+Screenshot+Here)
 
-Requires Python 3.11-3.13
+---
 
-```bash
-# With pipx (isolated environment)
-pipx install whisper-key-local
+## ✨ Features / Ключевые возможности
 
-# Or with pip
-pip install whisper-key-local
-```
+- 🚀 **Lightning Fast:** Uses `faster-whisper` and CTranslate2 for ultra-fast, near real-time transcription on your GPU.
+- 🎨 **Beautiful iOS-like UI:** Features a stunning 60-FPS mathematically accurate Siri wave (oscillograph) built with Electron and HTML5 Canvas. Glassmorphic transparency seamlessly blends with Windows 11.
+- 🌍 **Multi-language Support:** Excellent transcription for Russian (`zipformer.small.ru` & `large-v3-turbo`) and English.
+- ⌨️ **Global Hotkeys:** Works anywhere in Windows. Press `Ctrl + Win` to speak, release to paste.
+- 🔒 **100% Offline:** All AI models run locally on your machine. Your voice is never sent to the cloud.
 
-Then run: `whisper-key` (or `wk` for short)
+---
 
-### Windows App
+## 🛠 Tech Stack / Технологии
 
-1. Download `whisper-key.exe` from the [latest release](https://github.com/PinW/whisper-key-local/releases/latest)
-2. Run `whisper-key.exe`
+* **Backend Engine:** Python, `faster-whisper`, `CTranslate2`, `pyaudio`
+* **Frontend GUI:** Electron, HTML5 Canvas API (60-FPS rendering)
+* **IPC (Inter-Process Communication):** High-performance Local TCP Sockets
+* **AI Model:** `large-v3-turbo` (Default) / `zipformer.small.ru`
 
-### From Source
+---
 
-```bash
-git clone https://github.com/PinW/whisper-key-local.git
-cd whisper-key-local
-pip install -e .
-python whisper-key.py
-```
+## 📥 Installation / Установка
 
-## 🎤 Basic Usage
+### Prerequisites / Требования
+* Windows 10 or Windows 11 (Recommended for blur effects)
+* Node.js (for Electron UI)
+* Python 3.10+ 
+* Optional but highly recommended: NVIDIA GPU with CUDA for instant transcription
 
-| Hotkey | Windows | macOS |
-|--------|---------|-------|
-| Start recording | `Ctrl+Win` | `Fn+Ctrl` |
-| Stop & transcribe | `Ctrl` | `Fn` |
-| Stop & auto-send | `Alt` | `Option` |
-| Cancel recording | `Esc` | `Shift` |
-| Voice command mode | `Alt+Win` | `Fn+Command` |
+### Setup / Настройка
 
-Open the system tray / menu bar icon to:
-- Toggle auto-paste vs clipboard-only
-- Change transcription model
-- Select audio device
+1. **Clone the repo / Скачайте репозиторий:**
+   ```bash
+   git clone https://github.com/RandoTeam/whisper-key.git
+   cd whisper-key
+   ```
 
-## 🗣️ Voice Commands
+2. **Install Python dependencies / Установите зависимости Python:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Speak trigger phrases to run shell commands and more. Define in:
-- **Windows:** `%APPDATA%\whisperkey\commands.yaml`
-- **macOS:** `~/.whisperkey/commands.yaml`
+3. **Run the App / Запустите приложение:**
+   ```bash
+   # You can run it directly using our launcher
+   python -m src.whisper_key.main
+   ```
+   *(Note: The Electron GUI dependencies will be automatically installed via `npx` on the first run! / Зависимости для графического интерфейса скачаются автоматически при первом запуске).*
 
-```yaml
-commands:
-  # Send a keyboard shortcut
-  - trigger: "undo"
-    hotkey: "ctrl+z"
-  # Deliver pre-written text
-  - trigger: "my email"
-    type: "user@example.com"
-  # Run a shell command
-  - trigger: "open notepad"
-    run: 'notepad.exe'
-```
+---
 
-See the **[Voice Commands Guide](docs/voice-commands.md)** for full details.
+## ⚙️ How It Works / Как это работает
 
-## ⚡ GPU Acceleration
+1. **Start the app:** The background service will load the AI model into memory.
+2. **Press `Ctrl + Win`:** A beautiful translucent capsule will smoothly slide in from the bottom of your screen.
+3. **Speak:** The neon Siri-wave will react dynamically to your voice in real-time.
+4. **Release `Ctrl + Win`:** The app will finalize the transcription and instantly type the text into your currently active window (e.g. Word, Telegram, Browser).
 
-Whisper Key detects your GPU on first launch and offers one-press install of the required runtime libraries. Supports **NVIDIA** (CUDA) and **AMD** (ROCm).
+---
 
-For manual setup or troubleshooting, see the **[GPU Setup Guide](docs/gpu-setup.md)**.
+## 📜 License / Лицензия
 
-## ⚙️ Configuration
+Distributed under the **MIT License**. See `LICENSE` for more information.
 
-Local settings at:
-- **Windows:** `%APPDATA%\whisperkey\user_settings.yaml`
-- **macOS:** `~/.whisperkey/user_settings.yaml`
+*This project utilizes `faster-whisper` by SYSTRAN and the original `Whisper` model by OpenAI, both of which are open-source under the MIT License.*
 
-Delete this file and restart app to reset to defaults.
-
-| Option | Default | Notes |
-|--------|---------|-------|
-| **Whisper** |||
-| `whisper.model` | `tiny` | Any model defined in `whisper.models` |
-| `whisper.device` | `cpu` | cpu or cuda (NVIDIA/AMD GPU) — [setup guide](docs/gpu-setup.md) |
-| `whisper.compute_type` | `int8` | int8/float16/float32 |
-| `whisper.language` | `auto` | auto or language code (en, es, fr, etc.) |
-| `whisper.beam_size` | `5` | Higher = more accurate but slower (1-10) |
-| `whisper.initial_prompt` | `""` | Guide transcription style, language variant, or script |
-| `whisper.hotwords` | `[]` | Words the model should favor (names, technical terms) |
-| `whisper.models` | (see config) | Add custom HuggingFace or local models |
-| **Post-Processing** |||
-| `post_processing.strip_trailing_period` | `false` | Strip trailing period from output |
-| `post_processing.corrections` | `{}` | Fix recurring misheard words, e.g. `CAPEX: [cap x]` |
-| **Hotkeys** |||
-| `hotkey.recording_hotkey` | `ctrl+win` / `fn+ctrl` | Windows / macOS |
-| `hotkey.stop_key` | `ctrl` / `fn` | Stop recording |
-| `hotkey.auto_send_key` | `alt` / `option` | Stop + paste + Enter |
-| `hotkey.cancel_combination` | `esc` / `shift` | Cancel recording |
-| `hotkey.recording_mode` | `toggle` | toggle or push_to_talk |
-| `hotkey.command_hotkey` | `alt+win` / `fn+command` | Voice command mode |
-| **Voice Activity Detection** |||
-| `vad.vad_precheck_enabled` | `true` | Prevent hallucinations on silence |
-| `vad.vad_onset_threshold` | `0.7` | Speech detection start (0.0-1.0) |
-| `vad.vad_offset_threshold` | `0.55` | Speech detection end (0.0-1.0) |
-| `vad.vad_min_speech_duration` | `0.1` | Min speech segment (seconds) |
-| `vad.vad_realtime_enabled` | `true` | Auto-stop on silence |
-| `vad.vad_silence_timeout_seconds` | `30.0` | Seconds before auto-stop |
-| **Audio** |||
-| `audio.host` | `null` | Audio API (WASAPI, Core Audio, etc.) |
-| `audio.channels` | `1` | 1 = mono, 2 = stereo |
-| `audio.dtype` | `float32` | float32/int16/int24/int32 |
-| `audio.max_duration` | `900` | Max recording seconds (0 = unlimited) |
-| `audio.input_device` | `default` | Device ID or "default" |
-| **Clipboard** |||
-| `clipboard.auto_paste` | `true` | false = clipboard only |
-| `clipboard.delivery_method` | `paste` | paste (Ctrl+V) or type (direct injection) |
-| `clipboard.paste_hotkey` | `ctrl+v` / `cmd+v` | Paste key simulation |
-| `clipboard.paste_pre_paste_delay` | `0.05` | Delay after copy, before paste hotkey (seconds) |
-| `clipboard.paste_preserve_clipboard` | `true` | Restore clipboard after paste |
-| `clipboard.paste_clipboard_restore_delay` | `0.5` | Delay before clipboard restore (seconds) |
-| `clipboard.type_also_copy_to_clipboard` | `false` | Also copy to clipboard in type mode |
-| `clipboard.type_auto_enter_delay` | `0.15` | Delay before ENTER after typing (seconds) |
-| `clipboard.type_auto_enter_delay_per_100_chars` | `0.1` | Extra ENTER delay per 100 typed chars (seconds) |
-| **Logging** |||
-| `logging.level` | `INFO` | DEBUG/INFO/WARNING/ERROR/CRITICAL |
-| `logging.file.enabled` | `true` | Write to app.log |
-| `logging.log_transcriptions` | `false` | Include transcribed text in log (privacy) |
-| `logging.console.enabled` | `true` | Print to console |
-| `logging.console.level` | `WARNING` | Console verbosity |
-| **Audio Feedback** |||
-| `audio_feedback.enabled` | `true` | Play sounds on record/stop |
-| `audio_feedback.transcription_complete_enabled` | `false` | Play sound on transcription complete |
-| `audio_feedback.ready_enabled` | `true` | Play sound when app finishes loading |
-| `audio_feedback.start_sound` | `assets/sounds/...` | Custom sound file path |
-| `audio_feedback.stop_sound` | `assets/sounds/...` | Custom sound file path |
-| `audio_feedback.cancel_sound` | `assets/sounds/...` | Custom sound file path |
-| `audio_feedback.transcription_complete_sound` | `assets/sounds/...` | Custom sound file path |
-| `audio_feedback.ready_sound` | `assets/sounds/...` | Custom sound file path |
-| **System Tray** |||
-| `system_tray.enabled` | `true` | Show tray icon |
-| `system_tray.tooltip` | `Whisper Key` | Hover text |
-| **Terminal Title** |||
-| `terminal_title.idle` | `""` | Tab title prefix when idle: static string or `[prefix, seconds]` animation frames |
-| `terminal_title.recording` | 🔴 blink | Tab title prefix while recording |
-| `terminal_title.processing` | `""` | Tab title prefix while transcribing |
-| **Console** |||
-| `console.start_hidden` | `false` | Hide console after startup (whisper-key-hideable.exe only) |
-| **Update** |||
-| `update.mode` | `prompt` | prompt or auto |
-| **Voice Commands** |||
-| `voice_commands.enabled` | `true` | Enable voice command mode |
-
-## 📁 Model Cache
-
-Default path for transcription models (via HuggingFace):
-- **Windows:** `%USERPROFILE%\.cache\huggingface\hub\`
-- **macOS:** `~/.cache/huggingface/hub/`
-
-## Contributing
-
-Check the [roadmap](docs/roadmap/roadmap.md) for planned features and see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Please open an issue before starting work on new features.
-
-## 📦 Dependencies
-
-**Cross-platform:**
-`faster-whisper` · `numpy` · `sounddevice` · `soxr` · `pyperclip` · `ruamel.yaml` · `pystray` · `Pillow` · `playsound3` · `ten-vad` · `hf-xet`
-
-**Windows:** `global-hotkeys` · `pywin32`
-
-**macOS:** `pyobjc-framework-Quartz` · `pyobjc-framework-ApplicationServices`
+<br>
+<div align="center">
+  <i>Crafted with passion for beautiful UI and AI technology.</i>
+</div>
