@@ -103,6 +103,14 @@ This project is developed open-source. Donations are completely optional, but th
 
 ---
 
+## 👨‍💻 Authors / Авторы
+
+* **RandoTeam** — Lead Developer & Maintainer (GUI redesign, architecture, packaging)
+* Original `Whisper` by OpenAI
+* `faster-whisper` by SYSTRAN
+
+---
+
 ## 📜 License / Лицензия
 
 Distributed under the **MIT License**. See `LICENSE` for more information.
