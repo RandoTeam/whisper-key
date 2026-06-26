@@ -9,16 +9,16 @@
 
   <h1>🎤 Whisper Key / Beautiful STT Overlay</h1>
   <p><strong>A premium, lightning-fast Speech-To-Text floating widget for Windows.</strong></p>
-  <p><i>Стильный, молниеносный виджет диктовки (Голос-в-Текст) для Windows с анимациями уровня Apple Siri.</i></p>
+  <p><i>Стильный, молниеносный виджет диктовки (Голос-в-Текст) для Windows с невероятно плавными современными анимациями.</i></p>
 </div>
 
 <hr>
 
 ## 🌟 About The Project / О проекте
 
-**Whisper Key** is a beautiful, global overlay application that brings an elegant, Apple-like dictation experience to the Windows ecosystem. Built for professionals, writers, and power users, it completely bypasses the clunky default Windows dictation tools. Simply hold a hotkey (`Ctrl + Win`), speak naturally into your microphone, and watch as your voice is instantly transcribed and pasted into your active application.
+**Whisper Key** is a beautiful, global overlay application that brings a premium, seamless dictation experience to the Windows ecosystem. Built for professionals, writers, and power users, it completely bypasses the clunky default Windows dictation tools. Simply hold a hotkey (`Ctrl + Win`), speak naturally into your microphone, and watch as your voice is instantly transcribed and pasted into your active application.
 
-**Whisper Key** — это премиальный глобальный виджет, который переносит эстетику и удобство диктовки Apple на Windows. Проект создан для тех, кому важна скорость, красота и полная приватность. Просто зажмите горячую клавишу (`Ctrl + Win`), говорите естественным языком, и ваш текст будет моментально расшифрован и вставлен в любую активную программу, где сейчас стоит курсор (будь то Word, Telegram или браузер).
+**Whisper Key** — это премиальный глобальный виджет, который переносит современную эстетику и абсолютное удобство голосового ввода на Windows. Проект создан для тех, кому важна скорость, красота и полная приватность. Просто зажмите горячую клавишу (`Ctrl + Win`), говорите естественным языком, и ваш текст будет моментально расшифрован и вставлен в любую активную программу, где сейчас стоит курсор (будь то Word, Telegram или браузер).
 
 *(Place your screenshot here / Замените это на свой скриншот: `![Screenshot](assets/screenshot.png)`)*
 
@@ -27,7 +27,7 @@
 ## ✨ Features / Ключевые возможности
 
 - 🚀 **Lightning Fast:** Uses `faster-whisper` and CTranslate2 for ultra-fast, near real-time transcription on your GPU.
-- 🎨 **Beautiful iOS-like UI:** Features a stunning 60-FPS mathematically accurate Siri wave (oscillograph) built with Electron and HTML5 Canvas. The glassmorphic transparency perfectly blends with the Windows 11 Fluent design.
+- 🎨 **Beautiful UI:** Features a stunning 60-FPS mathematically accurate audio waveform (oscillograph) built with Electron and HTML5 Canvas. The glassmorphic transparency perfectly blends with the Windows 11 Fluent design.
 - 🌍 **Multi-language Support:** Excellent out-of-the-box transcription for Russian and English.
 - ⌨️ **Global Hotkeys:** Works globally anywhere in Windows. Press `Ctrl + Win` to speak, release to paste.
 - 🔒 **100% Offline & Private:** All AI models run locally on your machine. Your voice is never sent to the cloud.
