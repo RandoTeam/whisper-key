@@ -70,7 +70,7 @@ We chose a unique hybrid architecture to get the best of both worlds: Heavy AI p
 
 2. **Install Python dependencies / Установите зависимости Python:**
    ```bash
-   pip install -r requirements.txt
+   pip install .
    ```
 
 3. **Install GUI dependencies & Run / Установите зависимости GUI и запустите:**
