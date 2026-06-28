@@ -45,8 +45,15 @@ Whisper Key is designed to be **fully automated ("plug and play")**. You do not 
 
 ### 📦 Included Models / Доступные модели
 You can switch between these models in the settings depending on your needs:
-1. **`large-v3-turbo`** (Recommended) — The absolute best balance between speed and extreme accuracy for multiple languages (including English and Russian). Requires ~1.5 GB of free disk space.
-2. **`zipformer.small.ru`** (Sherpa-ONNX) — Specialized, lightning-fast streaming model strictly for the Russian language. Extremely lightweight.
+
+1. **`zipformer.small.ru` (Sherpa-ONNX)** — **Real-Time Streaming Model (Реал-тайм вывод текста):** 
+   * This is a specialized, extremely lightweight model designed strictly for the Russian language.
+   * **How it works:** It processes audio in real-time *as you speak*, allowing the GUI to display the words on your screen instantly without waiting for you to finish talking. 
+   * **Auto-download:** It automatically downloads a tiny footprint ONNX package upon first use.
+
+2. **`large-v3-turbo`** (Recommended for high accuracy) — **Batch Processing Model:**
+   * The absolute best balance between speed and extreme accuracy for multiple languages (including English and Russian). 
+   * **How it works:** It listens to your entire speech and processes it at lightning speed the moment you release the hotkey, applying perfect punctuation. Requires ~1.5 GB of free disk space.
 
 ---
 
