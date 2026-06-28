@@ -34,11 +34,19 @@
 
 ---
 
-## 🧠 AI Models / Модели ИИ
+## 🧠 AI Models & Automation / Модели ИИ и Автоматизация
 
-Whisper Key relies on state-of-the-art offline transcription models. By default, you can use:
-1. **`large-v3-turbo`** - The absolute best balance between speed and extreme accuracy for multiple languages.
-2. **`zipformer.small.ru`** (Sherpa-ONNX) - Specialized, lightning-fast streaming model for Russian language.
+Whisper Key is designed to be **fully automated ("plug and play")**. You do not need to manually download weights, configure punctuation models, or map text outputs.
+
+### 🤖 How Automation Works / Как работает автоматизация
+1. **Auto-Download:** Upon first launch, the application automatically connects to Hugging Face and downloads the highly optimized CTranslate2 model weights directly to your local cache (`~/.cache/huggingface/hub/`). 
+2. **Auto-Punctuation:** Whisper naturally predicts punctuation (commas, periods, question marks) and capitalization directly from the audio context. No separate "punctuation models" are required.
+3. **Auto-Type:** Once you release the hotkey, the text is instantly placed into your clipboard and automatically pasted (via `Ctrl+V` simulation) into whatever window you currently have open.
+
+### 📦 Included Models / Доступные модели
+You can switch between these models in the settings depending on your needs:
+1. **`large-v3-turbo`** (Recommended) — The absolute best balance between speed and extreme accuracy for multiple languages (including English and Russian). Requires ~1.5 GB of free disk space.
+2. **`zipformer.small.ru`** (Sherpa-ONNX) — Specialized, lightning-fast streaming model strictly for the Russian language. Extremely lightweight.
 
 ---
 
